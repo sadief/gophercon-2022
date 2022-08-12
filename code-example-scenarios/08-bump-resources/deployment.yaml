@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-shop
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      coffee-shop: web
+  template:
+    metadata:
+      labels:
+        coffee-shop: web
+    spec:
+      containers:
+      - name: coffee-shop
+        image: coffee-shop
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 4
+            memory: 3092M
+          requests:
+            cpu: 2
+            memory: 1024M

@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: coffee-shop
+  namespace: default
+  labels:
+    ingres-controller: nginx
+  annotations:
+    kubernets.io/ingress.class: "nginx"
+
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: coffee-shop
+            port: 
+              number: 8000
