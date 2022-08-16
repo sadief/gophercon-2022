@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	log.Printf("Starting up Coffee Shop Service")
 	http.HandleFunc("/serve-customer/", ServeCustomer)
 	http.ListenAndServe("localhost:8080", nil)
 }

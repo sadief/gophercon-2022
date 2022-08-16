@@ -2,15 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: coffee-shop
+  labels:
+    app: coffee-shop
+  namespace: default
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      run: coffee-shop
-  replicas: 2
+      app: coffee-shop
   template:
     metadata:
       labels:
-        run: coffee-shop
+        app: coffee-shop
     spec:
       containers:
       - name: coffee-shop
@@ -18,20 +21,24 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
-
+        resources:
+          limits:
+            cpu: 4
+            memory: 3092M
+          requests:
+            cpu: 2
+            memory: 1024M
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: coffee-shop
   labels:
-    run: coffee-shop
+    app: coffee-shop
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    run: coffee-shop
-  type: NodePort
-  sessionAffinity: None
+    app: coffee-shop

@@ -3,20 +3,20 @@ kind: Ingress
 
 metadata:
   name: coffee-shop
-  namespace: default
   labels:
-    ingres-controller: nginx
+    ingress-controller: nginx
   annotations:
-    kubernets.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: "nginx" 
 
 spec:
   rules:
-  - http:
+  - host: "localhost"
+    http:
       paths:
-      - path: /
-        pathType: Prefix
+      - pathType: Prefix
+        path: "/"
         backend:
           service:
             name: coffee-shop
-            port: 
-              number: 8000
+            port:
+              number: 80
