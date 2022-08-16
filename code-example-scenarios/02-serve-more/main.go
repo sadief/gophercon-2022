@@ -10,7 +10,7 @@ import (
 
 func main() {
 	http.HandleFunc("/serve-customer/", ServeCustomer)
-	http.ListenAndServe("localhost:8080", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func ServeCustomer(w http.ResponseWriter, r *http.Request) {
